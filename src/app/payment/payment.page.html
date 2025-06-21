@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pagamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    
+    <!-- Purchase Summary -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Resumo da Compra</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngFor="let item of items" class="summary-item">
+          <div>
+            <strong>{{ item.name }}</strong>
+            <br>
+            <small>{{ item.quantity }}x R$ {{ item.price | number:'1.2-2' }}</small>
+          </div>
+          <div class="price-text">
+            R$ {{ item.subtotal | number:'1.2-2' }}
+          </div>
+        </div>
+        
+        <ion-item lines="none" class="total-item">
+          <ion-label>
+            <h2><strong>Total Geral</strong></h2>
+          </ion-label>
+          <ion-note slot="end">
+            <h2 class="price-text"><strong>R$ {{ total | number:'1.2-2' }}</strong></h2>
+          </ion-note>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Payment Method Selection -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Método de Pagamento</ion-card-title>
+        <ion-card-subtitle>Escolha como deseja pagar</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button 
+          expand="block" 
+          color="primary" 
+          class="payment-button"
+          (click)="processPayment('CREDITO')">
+          <ion-icon name="card-outline" slot="start"></ion-icon>
+          Cartão de Crédito
+        </ion-button>
+        
+        <ion-button 
+          expand="block" 
+          color="secondary" 
+          class="payment-button"
+          (click)="processPayment('DEBITO')">
+          <ion-icon name="card-outline" slot="start"></ion-icon>
+          Cartão de Débito
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>
